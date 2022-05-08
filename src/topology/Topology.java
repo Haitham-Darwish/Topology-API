@@ -1,28 +1,24 @@
 package topology;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;    
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import com.google.gson.*;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Topology implements API{
 
 	private ObjectMapper om = new ObjectMapper();
-	public HashMap<String, Result> components_map=new HashMap();
+	public HashMap<String, Result> components_map=new HashMap<String, Result>();
 
 	/**
 	 * Read a topology from a given JSON file and store it in the memory
@@ -48,7 +44,7 @@ public class Topology implements API{
 	 
 	            JSONObject topology = (JSONObject) obj;
 	            
-	            // Store the id in the memeory
+	            // Store the id in the memory
 	            result.setId(topology.get("id").toString());
 	            
 	            // Store the JSON file 
@@ -71,7 +67,7 @@ public class Topology implements API{
 	            		String t1 = ((HashMap)((HashMap)((HashMap)((ArrayList) topology.get("components")).get(index))).get("netlist")).get("t1").toString(); 
 	            		String t2 = ((HashMap)((HashMap)((HashMap)((ArrayList) topology.get("components")).get(index))).get("netlist")).get("t2").toString(); 
 	                    
-	        			resistance.addResistance(default_, min=min, max=max, t1=t1, t2=t2);
+	        			resistance.addResistance(default_, min, max, t1, t2);
 	            		
 	            		result.addComponents(resistance);
 
@@ -160,25 +156,12 @@ public class Topology implements API{
 			
 		}
 		print+="]}";
-		//System.out.println("S"+print);
 		
 		// To make it printed in a pretty way
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonElement je = JsonParser.parseString(print);
 		String prettyJsonString = gson.toJson(je);
 		
-		/*
-		 //Creating a JSONObject object
-	      JSONObject jsonObject = new JSONObject();
-	      //Inserting key-value pairs into the json object
-	      jsonObject.put("Id", TopologyID);
-	      System.out.println(prettyJsonString);
-	      jsonObject.put("components", List.of(
-	    		  "type:resistance", 
-	    		  prettyJsonString
-	    		  
-	    		  ));
-	      */
 	      try {
 	         FileWriter file = new FileWriter(FileName);
 	         file.write(prettyJsonString);

@@ -1,30 +1,42 @@
 package topology;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-
 
 public class Component{
 	
+	// To add the type of the component
 	String type;
+	// To add the id of component
 	String id;
 	
-	  protected HashMap<String, String> netlist=new HashMap();
-	  protected HashMap<String, Integer> resistance =  new HashMap<String, Integer>();;
-	  protected HashMap<String, Double> m = new HashMap<String, Double>();;
+	// The HashMap that we will need to add the netlist to memory
+	protected HashMap<String, String> netlist=new HashMap<String, String>();
+	// The HashMap that we will need to add the resistance to memory
+	protected HashMap<String, Integer> resistance =  new HashMap<String, Integer>();;
+	// The HashMap that we will need to add the transistor to memory
+	protected HashMap<String, Double> m = new HashMap<String, Double>();;
 
-	 
-	
+	/**
+	 * Get the netlist 
+	 * @return HashMap<String, String> of the netlist
+	 * 
+	 */
 	public HashMap<String, String> getNetlist() {
 		return netlist;
 	}
 	
 
+	/**
+	 * Set the netlist
+	 * @param netlist the netlist that we want to set
+	 */
 	public void setNetlist(HashMap<String, String> netlist) {
 		this.netlist = netlist;
 	}
 	
+	/**
+	 * Constructor
+	 */
 	public Component() {
     }
 	
@@ -33,79 +45,36 @@ public class Component{
 		this.id = id;        
     }
 	
+	/**
+	 * Get the id 
+	 * @return id
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Set the id
+	 * @param id that we want to set
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 
-    
+    /**
+     * Get the type of the component
+     * @return type of the component
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Set the type of the component
+     * @param type that we want to set
+     */
     public void setType(String type) {
         this.type = type;
     }
-    
-    
-    /*
-	public void addComponent(String name, String default_, String min, String max,
-			String drain, String gate, String source) throws Exception {
-		if (type.equals("resistor"))
-			throw new Exception("The type is resistor not transitor");
-		
-		addTransistor(default_, min, max,
-				 drain, gate, source);
-		
-		component.put(name, m);
-	}
-	
-	public void addComponent(String name, String default_, String min, String max,
-			String t1, String t2) throws Exception {
-		if (!type.equals("resistor"))
-			throw new Exception("The type is transitor not resistor");
-		
-		addResistance(default_, min, max,
-				 t1, t2);
-		component.put(name, resistance);
-		
-	}
-	
-	public void addTransistor(String d, String min, String max,
-			String drain, String gate, String source) {
-
-			
-			m.put("default", d);
-			m.put("min", min);
-			m.put("max", max);
-			
-			netlist.put("drain", drain);
-			netlist.put("gate", gate);
-			netlist.put("source", source);
-	}
-	
-	public void addResistance(String default_, String min, String max,
-			String t1, String t2) {
-
-		resistance.put("default", default_);
-		resistance.put("min", min);
-		resistance.put("max", max);
-			
-			netlist.put("t1", t1);
-			netlist.put("t2", t2);
-			
-			
-	}
-	/*/
-    
-	
-
-	
-	
-	  
-
 }
